@@ -3,7 +3,7 @@ name: OLIVE Action
 
 # 워크플로가 실행 조건 정의
 on:
-  push: :
+  push:
     branches:
       - master
       - dev
