@@ -8,8 +8,7 @@ on:
     types: [opened, synchronize, reopened]
     # 특정 브랜치에 대한 PR일 때만 실행됩니다.
     branches:
-      - develop
-      - main
+      - dev
 
 # 워크플로 필요 권한 명시
 permissions:
