@@ -1,0 +1,37 @@
+# 워크플로 이름 정의. GitHub Actions 탭 이름으로 표시
+name: OLIVE Action 
+
+# 워크플로가 실행 조건 정의
+on:
+  pull_request:
+    # PR이 열리거나(opened), 수정되거나(synchronize), 다시 열릴 때(reopened) 실행
+    types: [opened, synchronize, reopened]
+    # 특정 브랜치에 대한 PR일 때만 실행됩니다.
+    branches:
+      - develop
+      - main
+
+# 워크플로 필요 권한 명시
+permissions:
+  contents: read        # 저장소 읽기 권한
+  issues: write         # 이슈 쓰기 권한
+  pull-requests: write  # PR 코멘트 작성 권한
+
+# 실행 작업 정의
+jobs:
+  olive-action:
+    # 실행 환경: Ubuntu 최신 버전 
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1단계: 저장소 소스 코드 체크아웃
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2단계: OLIVE Action 실행
+      - name: Run OLIVE Action 
+        uses: kakao/olive-action@v1
+        with:
+          # GitHub Secrets 저장 토큰 명시 
+          olive-token: ${{ secrets.OLIVE_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }} 
